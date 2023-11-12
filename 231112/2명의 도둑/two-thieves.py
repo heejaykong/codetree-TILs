@@ -6,6 +6,7 @@ grid = [list(map(int, input().split())) for i in range(n)]
 def solution(m, c, grid):
     ans = -1
     n = len(grid)
+    memo = [[-1] * n for i in range(n)]
 
     def is_possible(i,j,k,l):
         # 같은 행인데 만약 영역끼리 겹친다면
@@ -38,12 +39,19 @@ def solution(m, c, grid):
     def get_max(x, y):
         nonlocal curr_max
 
+        # 메모이제이션 로직 추가 1/2
+        if memo[x][y] != -1:
+            return memo[x][y]
+
         nums = grid[x][y:y + m]
         len_nums = len(nums)
 
         curr_max = -1
         choose(len_nums, nums, 0)
         # print(curr_max)
+
+        # 메모이제이션 로직 추가 2/2
+        memo[x][y] = curr_max
         return curr_max
 
     # 1. 두 도둑의 위치 완전탐색으로 지정하기
