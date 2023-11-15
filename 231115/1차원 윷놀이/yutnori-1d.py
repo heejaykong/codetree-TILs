@@ -23,12 +23,13 @@ def solution(m, k, turns):
 
         if curr_idx == n:
             return
+
         for i in range(k):
             # 이미 점수를 딴 말이면 스루
             if horses[i] >= m:
                 continue
 
-            dist = turns[i]
+            dist = turns[curr_idx]
             horses[i] += dist
             choose(curr_idx + 1)
             horses[i] -= dist
