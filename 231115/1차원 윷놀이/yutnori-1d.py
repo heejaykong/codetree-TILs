@@ -17,8 +17,11 @@ def solution(m, k, turns):
     def choose(curr_idx):
         nonlocal ans
 
+        # 유의: 아래 for문 속 if문 때문에
+        # 얘는 매 재귀마다 최대값과 겨뤄줘야 함
+        ans = max(ans, calc(horses[:]))
+
         if curr_idx == n:
-            ans = max(ans, calc(horses[:]))
             return
         for i in range(k):
             # 이미 점수를 딴 말이면 스루
