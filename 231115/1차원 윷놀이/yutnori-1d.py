@@ -1,41 +1,44 @@
-# 변수 선언 및 입력:
-n, m, k = tuple(map(int, input().split()))
-nums = list(map(int, input().split()))
-pieces = [1 for _ in range(k)]
-
-ans = 0
+n,m,k = tuple(map(int, input().split()))
+turns = list(map(int, input().split()))
 
 
-# 점수를 계산합니다.
-def calc():
-    score = 0
-    for piece in pieces:
-        score += (piece >= m)
-    
-    return score
+def solution(m, k, turns):
+    ans = -1
+    n = len(turns)
+    horses = [1 for _ in range(k)]
+
+    def calc(horses):
+        count = 0
+        for horse in horses:
+            if horse >= m:
+                count += 1
+        return count
+
+    def choose(curr_idx):
+        nonlocal ans
+
+        # 유의: 아래 for문 속 if문 때문에
+        # 얘는 매 재귀마다 최대값과 겨뤄줘야 함
+        ans = max(ans, calc(horses[:]))
+
+        if curr_idx == n:
+            return
+        for i in range(k):
+            # 이미 점수를 딴 말이면 스루
+            if horses[i] >= m:
+                continue
+
+            dist = turns[i]
+            horses[i] += dist
+            choose(curr_idx + 1)
+            horses[i] -= dist
+
+    # 1. n길이의, 1~k를 원소로 지닌 중복순열 만들기
+    # 2. 그 순열 원소가 곧 말이 되어... 점수 계산하기
+    # 3. 점수로 최대값 겨루기
+    choose(0)
+
+    return ans
 
 
-def find_max(cnt):
-    global ans
-    
-    # 말을 직접 n번 움직이지 않아도
-    # 최대가 될 수 있으므로 항상 답을 갱신합니다.
-    ans = max(ans, calc())
-    
-    # 더 이상 움직일 수 없으면 종료합니다.
-    if cnt == n: 
-        return
-	
-    for i in range(k):
-        # 움직여서 더 이득이 되지 않는
-        # 말은 더 이상 움직이지 않습니다.
-        if pieces[i] >= m:
-            continue
-        
-        pieces[i] += nums[cnt]
-        find_max(cnt + 1)
-        pieces[i] -= nums[cnt]
-
-
-find_max(0)
-print(ans)
+print(solution(m, k, turns))
