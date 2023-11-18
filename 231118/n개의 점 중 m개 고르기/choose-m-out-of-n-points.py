@@ -8,10 +8,24 @@ def solution(dots, m):
     MAX = 100 * 2 + 100 * 2  # 절대 안될 값으로 대강 산정한 것임
     ans = MAX
 
+    def calc(x1, y1, x2, y2):
+        return (x1 - x2) ** 2 + (y1 - y2) ** 2
+
+    def get_max(arr):
+        max_val = -1
+        for i in range(len(arr)):
+            x1, y1 = arr[i]
+            for j in range(len(arr)):
+                x2, y2 = arr[j]
+                max_val = max(max_val, calc(x1, y1, x2, y2))
+        return max_val
+
     arr = []
     def choose(dot_idx, curr_leng):
+        nonlocal ans
+
         if curr_leng == m:
-            print(arr)
+            ans = min(ans, get_max(arr[:]))
             return
         if dot_idx == len_dots:
             return
