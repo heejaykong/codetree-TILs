@@ -16,6 +16,8 @@ def solution(dots, m):
         for i in range(len(arr)):
             x1, y1 = arr[i]
             for j in range(len(arr)):
+                if i == j:
+                    continue
                 x2, y2 = arr[j]
                 max_val = max(max_val, calc(x1, y1, x2, y2))
         return max_val
