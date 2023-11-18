@@ -5,55 +5,34 @@ grid = [list(map(int, input().split())) for i in range(n)]
 
 def solution(grid):
     n = len(grid)
-    visited_rows = [False] * n
-    visited_cols = [False] * n  # (그냥 2차원으로 visited 만들수도 있겠지만 나중에 행이랑 열 계산하는게 귀찮아서 걍 행용 열용 따로 만듦) 
+    visited_cols = [False] * n
     ans = -1
     curr_sum = 0
-
-    # 순열로 만들 대상 초기화
-    pos = []
-    for i in range(n):
-        for j in range(n):
-            pos.append((i, j))
-    len_pos = len(pos)
-
-    # def calc(arr):
-    #     total = 0
-    #     for x, y in arr:
-    #         total += grid[x][y]
-    #     return total
 
     arr = []
     def choose(curr_leng):
         nonlocal ans, curr_sum
  
         if curr_leng == n:
-            # ans = max(ans, calc(arr[:]))
             ans = max(ans, curr_sum)
             return
  
-        for i in range(len_pos):
-            row, col = pos[i]
-
-            if visited_rows[row] or visited_cols[col]:
+        for i in range(n):
+            if visited_cols[i]:
                 continue
 
-            # arr.append(pos[i])
-            curr_sum += grid[row][col]
-            visited_rows[row] = True
-            visited_cols[col] = True
+            curr_sum += grid[curr_leng][i]
+            visited_cols[i] = True
 
             choose(curr_leng + 1)
 
-            # arr.pop()
-            curr_sum -= grid[row][col]
-            visited_rows[row] = False
-            visited_cols[col] = False
+            curr_sum -= grid[curr_leng][i]
+            visited_cols[i] = False
 
-    # 각 i,j 칸 단위로 중복이 없는 순열을 만든다
+    # 행은 고려 안하고 열만 고려해도 충분한 문제였음,,,
     # 중복없는 순열을 만들려면,
     # 중복순열 로직(for문사용)에 visited만 얹어주면 된다
-    # 만약 append하려는 대상이 이미 visited된 행이나 열이라면 스루해야 함
+    # 만약 append하려는 대상이 이미 visited된 열이라면 스루해야 함
     # 다 만들어진 순열의 합을 구해 최대값과 겨루기
     choose(0)
     return ans
