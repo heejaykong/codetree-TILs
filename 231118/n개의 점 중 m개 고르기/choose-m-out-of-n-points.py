@@ -5,7 +5,7 @@ dots = [tuple(map(int, input().split())) for i in range(n)]
 
 def solution(dots, m):
     len_dots = len(dots)
-    MAX = 100 * 2 + 100 * 2  # 절대 안될 값으로 대강 산정한 것임
+    MAX = 100 ** 2 + 100 ** 2 + 1 # 절대 안될 값으로 대강 산정한 것임
     ans = MAX
 
     def calc(x1, y1, x2, y2):
