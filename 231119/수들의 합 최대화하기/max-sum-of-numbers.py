@@ -8,6 +8,7 @@ def solution(grid):
     visited_rows = [False] * n
     visited_cols = [False] * n  # (그냥 2차원으로 visited 만들수도 있겠지만 나중에 행이랑 열 계산하는게 귀찮아서 걍 행용 열용 따로 만듦) 
     ans = -1
+    curr_sum = 0
 
     # 순열로 만들 대상 초기화
     pos = []
@@ -16,18 +17,19 @@ def solution(grid):
             pos.append((i, j))
     len_pos = len(pos)
 
-    def calc(arr):
-        total = 0
-        for x, y in arr:
-            total += grid[x][y]
-        return total
+    # def calc(arr):
+    #     total = 0
+    #     for x, y in arr:
+    #         total += grid[x][y]
+    #     return total
 
     arr = []
     def choose(curr_leng):
-        nonlocal ans
+        nonlocal ans, curr_sum
  
         if curr_leng == n:
-            ans = max(ans, calc(arr[:]))
+            # ans = max(ans, calc(arr[:]))
+            ans = max(ans, curr_sum)
             return
  
         for i in range(len_pos):
@@ -36,13 +38,15 @@ def solution(grid):
             if visited_rows[row] or visited_cols[col]:
                 continue
 
-            arr.append(pos[i])
+            # arr.append(pos[i])
+            curr_sum += grid[row][col]
             visited_rows[row] = True
             visited_cols[col] = True
 
             choose(curr_leng + 1)
 
-            arr.pop()
+            # arr.pop()
+            curr_sum -= grid[row][col]
             visited_rows[row] = False
             visited_cols[col] = False
 
