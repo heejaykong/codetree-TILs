@@ -16,9 +16,16 @@ def solution(adj):
         total = 0
         depart = 1
         for dest in arr:
+            # 유의: 이동비용이 0이면 이동할 수 없는 경우니까 스루해야 함
+            if adj[depart-1][dest-1] == 0:
+                return MAX
             total += adj[depart-1][dest-1]
             depart = dest
+
         dest = 1
+        # 유의: 이동비용이 0이면 이동할 수 없는 경우니까 스루해야 함
+        if adj[depart-1][dest-1] == 0:
+            return MAX
         total += adj[depart-1][dest-1]
         return total
 
