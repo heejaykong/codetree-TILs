@@ -9,9 +9,9 @@ def solution(grid):
     ans = 0
     SNAKE, NO_SNAKE = 0, 1
     n = len(grid)
-    visited = [[False] * n for i in range(n)]
+    visited = [[False] * m for i in range(n)]
     sx, sy = 0, 0
-    ex, ey = n-1, n-1
+    ex, ey = n-1, m-1
 
     def push(nx, ny):
         visited[nx][ny] = True
