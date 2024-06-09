@@ -3,21 +3,22 @@ k, n = tuple(map(int, input().split()))
 def solution(k, n):
     ans = []
 
-    elem = []
+    arr = []
     def choose(curr_idx):
         if curr_idx == n:
-            ans.append(elem[:])
+            ans.append(arr[:])
             return
 
         for i in range(1, k + 1):
-            elem.append(i)
+            arr.append(i)
             choose(curr_idx + 1)
-            elem.pop()
+            arr.pop()
 
     choose(0)
     return ans
 
 ans = solution(k, n)
-for elem in ans:
-    a, b = elem
-    print(a, b)
+for arr in ans:
+    for elem in arr:
+        print(elem, end=" ")
+    print()
