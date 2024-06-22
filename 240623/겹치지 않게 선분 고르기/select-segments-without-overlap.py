@@ -12,12 +12,13 @@ def solution(lines):
             my_x, my_y = arr[i]
 
             for j in range(leng):
-                if i == j:
+                if i >= j:
                     continue
 
                 other_x, other_y = arr[j]
 
-                if my_x <= other_x <= my_y or my_x <= other_y <= my_y:
+                if my_x <= other_x <= my_y or my_x <= other_y <= my_y or \
+                    other_x <= my_x <= other_y or other_x <= my_y <= other_y:
                     return True
 
         return False
