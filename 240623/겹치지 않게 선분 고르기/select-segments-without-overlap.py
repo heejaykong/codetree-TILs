@@ -12,7 +12,7 @@ def solution(lines):
             my_x, my_y = arr[i]
 
             for j in range(leng):
-                if i >= j:
+                if i == j:
                     continue
 
                 other_x, other_y = arr[j]
