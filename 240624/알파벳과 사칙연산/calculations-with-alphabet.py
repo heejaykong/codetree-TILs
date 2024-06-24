@@ -3,7 +3,8 @@ question_statement = input()
 
 
 def solution(statement):
-    ans = 0
+    MIN = -(2**31)
+    ans = MIN
     arr = []
     idx_mapper = {
         'a': 0,
