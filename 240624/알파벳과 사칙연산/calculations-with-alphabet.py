@@ -1,4 +1,5 @@
-# 복잡도는 O(2^6 * n)
+# 복잡도는 O(2^6 * n) <- 틀림
+# 복잡도는 O(4^6 * n)이 맞음
 question_statement = input()
 
 
