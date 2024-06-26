@@ -24,7 +24,7 @@ def solution(destination, horse_count, distances):
             distance = distances[turn]
             scores[horse] += distance
 
-            if score >= destination:
+            if scores[horse] >= destination:
                 result += 1
 
         return result
