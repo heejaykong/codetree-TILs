@@ -17,6 +17,10 @@ def solution(destination, horse_count, distances):
         scores = [0] + [1 for i in range(horse_count)]
 
         for turn, horse in enumerate(chosen_arr):
+            # 이미 점수를 쵝득한 말이면 스루
+            if scores[horse] >= destination:
+                continue
+
             distance = distances[turn]
             scores[horse] += distance
 
