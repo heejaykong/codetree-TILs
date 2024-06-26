@@ -62,29 +62,3 @@ def solution(grid, directions, r, c):
 
 
 print(solution(grid, directions, r, c))
-
-
-
-
-
-
-
-
-
-
-
-# 안녕하세요?
-# 메모리 초과가 떠서 혼자 문제를 찾다 도저히 안 보여서 도움을 요청드립니다.
-
-# 현재 칸이 바라보는 방향에 놓인 칸들을 탐색하는 과정에서 while True문을 쓰고 있기 때문에 아마 무한루프가 도는 게 아닐까 싶은데요,,,
-
-# 암만 봐도 
-# ```python
-# for i in range(n):
-# 	print(i)
-# ```
-
-# ```cpp
-# for(int i = 0; i < n; i++)
-# 	printf("%d\n", i);
-# ```
