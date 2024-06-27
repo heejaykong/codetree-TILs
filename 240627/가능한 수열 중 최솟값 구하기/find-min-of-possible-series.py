@@ -4,8 +4,6 @@ n = int(input())
 def solution(n):
     ans = []
     arr = []
-    found = False
-
 
     def in_range(start_idx, length):
         nonlocal n
@@ -16,6 +14,10 @@ def solution(n):
 
 
     def possible(arr):
+        n = len(arr)
+        if n == 1:
+            return True
+        # print(arr)
         for start_idx in range(n):
             for length in range(1, n + 1):
                 if not in_range(start_idx, length):
@@ -28,23 +30,19 @@ def solution(n):
 
 
     def choose(curr_idx):
-        nonlocal n, found, ans
+        nonlocal n, ans
 
-        if found == True:
+        if len(ans) > 0:
             return
 
-        # 2. 부분 일치하는지 확인
         if curr_idx == n:
-            if possible(arr[:]):
-                # print(arr)
-                found = True
-                ans = arr[:]
-            # print("ans", ans)
+            ans = arr[:]
             return
         
         for i in range(4, 6 + 1):
             arr.append(i)
-            choose(curr_idx + 1)
+            if possible(arr[:]):
+                choose(curr_idx + 1)
             arr.pop()
 
 
